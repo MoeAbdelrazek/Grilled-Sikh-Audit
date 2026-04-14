@@ -7,61 +7,143 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --gold: #c9a961; --gold-dim: #8a6f3a; --gold-faint: rgba(201,169,97,0.08);
-    --dark: #0a0a0a; --dark2: #111; --dark3: #161616; --dark4: #1e1e1e; --dark5: #242424;
-    --red: #c94444; --green: #4caf7d; --amber: #d4882a; --blue: #4a90d9;
-    --text: #c8b894; --text-dim: #60503a; --white: #f0e8d8;
+    --gold: #c9a961; --gold-dim: #8a6f3a;
+    --dark: #0a0a0a; --dark3: #161616; --dark4: #1e1e1e; --dark5: #262626;
+    --red: #c94444; --green: #4caf7d; --amber: #d4882a;
+    --text: #c8b894; --text-dim: #6a5840; --white: #f0e8d8;
     --fire: #e8581a;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#060606; font-family:'Poppins',sans-serif; color:var(--text); }
+  body { background:#060606; font-family:'Poppins',sans-serif; color:var(--text); font-size:15px; line-height:1.6; }
 
-  .page { width:100%; min-height:100vh; background:var(--dark); display:flex; flex-direction:column; margin-bottom:12px; page-break-after:always; position:relative; overflow:hidden; }
+  /* ── PAGE ── */
+  .page { width:100%; min-height:100vh; background:var(--dark); display:flex; flex-direction:column; margin-bottom:8px; page-break-after:always; }
   .gold-bar { height:5px; background:linear-gradient(90deg,var(--gold-dim),var(--gold),var(--gold-dim)); flex-shrink:0; }
-  .page-footer { padding:16px 72px; border-top:1px solid rgba(201,169,97,0.1); display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+
+  /* ── HEADER ── */
+  .page-header { padding:48px 6vw 0; text-align:center; position:relative; margin-bottom:36px; flex-shrink:0; }
+  .page-num { position:absolute; top:48px; right:6vw; font-size:12px; color:var(--text-dim); letter-spacing:2px; }
+  .eyebrow { font-size:11px; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+  .h1 { font-family:'Playfair Display',serif; font-size:clamp(36px,5vw,54px); font-weight:900; color:var(--white); line-height:1.05; }
+  .h1 em { color:var(--gold); font-style:italic; }
+
+  /* ── BODY ── */
+  .page-body { flex:1; padding:0 6vw 44px; display:flex; flex-direction:column; gap:28px; }
+
+  /* ── FOOTER ── */
+  .page-footer { padding:18px 6vw; border-top:1px solid rgba(201,169,97,0.12); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; flex-shrink:0; }
   .ft { font-size:10px; letter-spacing:2px; text-transform:uppercase; }
   .ft.brand { color:var(--gold-dim); } .ft.conf { color:var(--text-dim); }
 
-  .page-header { padding:44px 72px 0; text-align:center; position:relative; margin-bottom:32px; flex-shrink:0; }
-  .page-num { position:absolute; top:44px; right:72px; font-size:11px; color:var(--text-dim); letter-spacing:2px; }
-  .eyebrow { font-size:10px; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
-  .h1 { font-family:'Playfair Display',serif; font-size:46px; font-weight:900; color:var(--white); line-height:1.05; }
-  .h1 em { color:var(--gold); font-style:italic; }
-  .page-body { flex:1; padding:0 72px 40px; display:flex; flex-direction:column; gap:24px; }
+  /* ── SHARED COMPONENTS ── */
+  .card { background:var(--dark3); border:1px solid rgba(201,169,97,0.14); border-radius:4px; padding:28px; }
+  .card-title { font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:22px; }
 
-  /* SHARED */
-  .card { background:var(--dark3); border:1px solid rgba(201,169,97,0.12); border-radius:3px; padding:24px; }
-  .card-title { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); text-align:center; margin-bottom:18px; }
-  .chip { display:inline-block; font-size:9px; letter-spacing:2px; font-weight:700; text-transform:uppercase; padding:3px 10px; border-radius:2px; }
-  .chip.red { background:rgba(201,68,68,0.15); color:var(--red); }
+  .chip { display:inline-block; font-size:10px; letter-spacing:1px; font-weight:700; text-transform:uppercase; padding:4px 12px; border-radius:3px; white-space:nowrap; }
+  .chip.red   { background:rgba(201,68,68,0.15);  color:var(--red);   }
   .chip.amber { background:rgba(212,136,42,0.15); color:var(--amber); }
   .chip.green { background:rgba(76,175,125,0.15); color:var(--green); }
-  .chip.grey { background:rgba(100,100,100,0.15); color:#888; }
-  .chip.gold { background:rgba(201,169,97,0.15); color:var(--gold); }
-  .chip.fire { background:rgba(232,88,26,0.15); color:var(--fire); }
+  .chip.grey  { background:rgba(130,130,130,0.15);color:#aaa;         }
+  .chip.fire  { background:rgba(232,88,26,0.15);  color:var(--fire);  }
 
-  /* COVER */
-  .cover-body { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:56px 100px; text-align:center; position:relative; }
-  .cover-wm { position:absolute; font-family:'Playfair Display',serif; font-size:480px; font-weight:900; color:rgba(201,169,97,0.025); left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none; line-height:1; }
-  .c-eyebrow { font-size:11px; letter-spacing:6px; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
-  .c-title { font-family:'Playfair Display',serif; font-size:96px; font-weight:900; color:var(--white); line-height:0.92; margin-bottom:10px; }
+  /* ── GRIDS — fluid, collapse to 1-col on mobile ── */
+  .grid-2 { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+  .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .grid-4 { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .grid-5 { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+
+  @media(max-width:900px) {
+    .grid-4,.grid-5 { grid-template-columns:repeat(2,1fr); }
+  }
+  @media(max-width:640px) {
+    .page-header { padding:36px 5vw 0; }
+    .page-num { top:36px; right:5vw; }
+    .page-body { padding:0 5vw 36px; gap:20px; }
+    .page-footer { padding:14px 5vw; }
+    .card { padding:20px; }
+    .grid-2,.grid-3,.grid-4,.grid-5 { grid-template-columns:1fr; }
+    .h1 { font-size:32px; }
+  }
+
+  /* ── STATUS ROW ── */
+  .s-row { display:flex; justify-content:space-between; align-items:center; padding:13px 16px; background:var(--dark4); border-radius:3px; gap:12px; }
+  .s-row + .s-row { margin-top:8px; }
+  .s-label { font-size:13px; color:var(--text); flex:1; }
+
+  /* ── HBAR ── */
+  .hbar-row { display:flex; align-items:center; gap:14px; margin-bottom:12px; }
+  .hbar-row:last-child { margin-bottom:0; }
+  .hbar-name { font-size:12px; color:var(--text); min-width:140px; flex-shrink:0; }
+  .hbar-name span { display:block; font-size:10px; color:var(--text-dim); }
+  .hbar-track { flex:1; height:10px; background:var(--dark5); border-radius:5px; overflow:hidden; }
+  .hbar-fill { height:100%; border-radius:5px; }
+  .hbar-val { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; min-width:48px; text-align:right; }
+
+  /* ── CALLOUT ── */
+  .callout { padding:18px 22px; border-radius:3px; border-left:4px solid; }
+  .callout.amber { background:rgba(212,136,42,0.06); border-color:var(--amber); }
+  .callout.green { background:rgba(76,175,125,0.06); border-color:var(--green); }
+  .callout.red   { background:rgba(201,68,68,0.06);  border-color:var(--red);   }
+  .callout h4 { font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; text-align:center; margin-bottom:8px; }
+  .callout.amber h4 { color:var(--amber); }
+  .callout.green h4 { color:var(--green); }
+  .callout.red h4   { color:var(--red);   }
+  .callout p { font-size:13px; line-height:1.75; color:var(--text); text-align:center; }
+
+  /* ── KPI CARD ── */
+  .kpi { background:var(--dark4); border:1px solid rgba(201,169,97,0.12); border-radius:3px; padding:22px 16px; text-align:center; }
+  .kpi-num { font-family:'Playfair Display',serif; font-size:40px; font-weight:900; line-height:1; margin-bottom:6px; }
+  .kpi-lbl { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text-dim); }
+
+  /* ── FUNNEL STEP ── */
+  .funnel-step { display:flex; align-items:center; gap:18px; padding:16px 20px; border-radius:3px; }
+  .funnel-step + .funnel-step { margin-top:8px; }
+  .fn { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:rgba(201,169,97,0.3); width:36px; flex-shrink:0; }
+  .ft2 { flex:1; font-size:13px; color:var(--text); line-height:1.5; }
+  .ft2 strong { color:var(--white); display:block; font-size:15px; margin-bottom:2px; }
+
+  /* ── PILLAR ── */
+  .pillar { background:var(--dark3); border:1px solid rgba(201,169,97,0.14); border-radius:4px; padding:26px 20px; display:flex; flex-direction:column; align-items:center; gap:12px; text-align:center; }
+  .pn  { font-family:'Playfair Display',serif; font-size:52px; font-weight:900; color:rgba(201,169,97,0.12); line-height:1; }
+  .pt  { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); }
+  .ph  { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--white); line-height:1.2; }
+  .p-chips { display:flex; flex-wrap:wrap; gap:5px; justify-content:center; }
+  .pchip { font-size:10px; padding:3px 10px; border:1px solid rgba(201,169,97,0.2); border-radius:3px; color:var(--gold-dim); }
+  .pillar-li { display:flex; align-items:flex-start; gap:8px; font-size:12px; color:var(--text); text-align:left; }
+  .pillar-li span { color:var(--green); flex-shrink:0; font-size:14px; }
+
+  /* ── COVER ── */
+  .cover-body { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 6vw; text-align:center; position:relative; }
+  .cover-wm { position:absolute; font-family:'Playfair Display',serif; font-size:clamp(200px,40vw,500px); font-weight:900; color:rgba(201,169,97,0.025); left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none; line-height:1; }
+  .c-eyebrow { font-size:11px; letter-spacing:6px; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+  .c-title { font-family:'Playfair Display',serif; font-size:clamp(64px,12vw,108px); font-weight:900; color:var(--white); line-height:0.92; margin-bottom:12px; }
   .c-title span { color:var(--fire); font-style:italic; display:block; }
-  .c-sub { font-family:'Playfair Display',serif; font-size:20px; color:var(--gold-dim); font-style:italic; margin-bottom:30px; }
-  .c-divider { width:60px; height:1px; background:var(--gold); margin:0 auto 28px; }
-  .c-meta { display:grid; grid-template-columns:repeat(6,1fr); gap:1px; background:rgba(201,169,97,0.1); border:1px solid rgba(201,169,97,0.1); max-width:820px; width:100%; margin:0 auto 28px; border-radius:2px; overflow:hidden; }
+  .c-sub { font-family:'Playfair Display',serif; font-size:clamp(16px,2.5vw,22px); color:var(--gold-dim); font-style:italic; margin-bottom:32px; }
+  .c-divider { width:60px; height:1px; background:var(--gold); margin:0 auto 32px; }
+  .c-meta { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(201,169,97,0.12); border:1px solid rgba(201,169,97,0.12); max-width:820px; width:100%; margin:0 auto 32px; border-radius:3px; overflow:hidden; }
   .cmi { background:var(--dark3); padding:18px 14px; }
-  .cmi label { display:block; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--text-dim); margin-bottom:5px; }
-  .cmi value { display:block; font-size:13px; font-weight:600; color:var(--white); }
-  .score-band { max-width:820px; width:100%; background:var(--dark3); border:1px solid rgba(201,169,97,0.15); border-radius:3px; padding:22px 32px; display:flex; align-items:center; gap:28px; }
+  .cmi label { display:block; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--text-dim); margin-bottom:6px; }
+  .cmi value { display:block; font-size:14px; font-weight:600; color:var(--white); }
+  .score-band { max-width:820px; width:100%; background:var(--dark3); border:1px solid rgba(201,169,97,0.15); border-radius:4px; padding:24px 32px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
   .sb-label { font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--text-dim); white-space:nowrap; }
-  .sb-score { font-family:'Playfair Display',serif; font-size:56px; font-weight:900; color:var(--amber); line-height:1; }
-  .sb-of { font-size:16px; color:var(--text-dim); font-family:'Playfair Display',serif; }
-  .sb-track { flex:1; height:8px; background:var(--dark5); border-radius:4px; overflow:hidden; }
+  .sb-score { font-family:'Playfair Display',serif; font-size:clamp(44px,8vw,64px); font-weight:900; color:var(--amber); line-height:1; }
+  .sb-of { font-size:18px; color:var(--text-dim); font-family:'Playfair Display',serif; }
+  .sb-track { flex:1; min-width:100px; height:8px; background:var(--dark5); border-radius:4px; overflow:hidden; }
   .sb-fill { height:100%; border-radius:4px; }
-  .sb-verdict { font-size:12px; font-weight:700; color:var(--amber); letter-spacing:1px; white-space:nowrap; }
-  .cover-footer { padding:20px 72px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(201,169,97,0.12); }
-  .ag-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:var(--gold); }
-  .ag-sub { font-size:9px; letter-spacing:3px; color:var(--gold-dim); text-transform:uppercase; }
+  .sb-verdict { font-size:13px; font-weight:700; color:var(--amber); letter-spacing:1px; }
+  .cover-footer { padding:20px 6vw; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(201,169,97,0.12); flex-wrap:wrap; gap:8px; }
+  .ag-name { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--gold); }
+  .ag-sub { font-size:10px; letter-spacing:3px; color:var(--gold-dim); text-transform:uppercase; }
+
+  /* ── RADIAL LABEL ── */
+  .radial-wrap { display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .radial-name { font-size:14px; font-weight:600; color:var(--white); text-align:center; }
+  .radial-sub  { font-size:11px; color:var(--text-dim); text-align:center; margin-top:-6px; }
+
+  @media print {
+    body { background:#0a0a0a; }
+    .page { page-break-after:always; min-height:297mm; }
+  }
 </style>
 </head>
 <body>
@@ -112,7 +194,7 @@
     <!-- Radial scores -->
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:22px;">
 
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div class="radial-wrap">
         <svg width="110" height="110" viewBox="0 0 110 110">
           <circle cx="55" cy="55" r="44" fill="none" stroke="var(--dark5)" stroke-width="12"/>
           <circle cx="55" cy="55" r="44" fill="none" stroke="var(--red)" stroke-width="12"
@@ -120,13 +202,13 @@
           <text x="55" y="60" text-anchor="middle" font-family="Playfair Display,serif" font-size="26" font-weight="900" fill="var(--red)">30</text>
         </svg>
         <div style="text-align:center;">
-          <div style="font-size:13px;font-weight:600;color:var(--white);">Instagram</div>
-          <div style="font-size:10px;color:var(--text-dim);margin-bottom:9px;">@grilledsikh · 9,715 followers · last post 37w ago</div>
+          <div class="radial-name">Instagram</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-bottom:9px;">@grilledsikh · 9,715 followers · last post 37w ago</div>
           <div class="chip red">Dormant — 37 Weeks</div>
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div class="radial-wrap">
         <svg width="110" height="110" viewBox="0 0 110 110">
           <circle cx="55" cy="55" r="44" fill="none" stroke="var(--dark5)" stroke-width="12"/>
           <circle cx="55" cy="55" r="44" fill="none" stroke="var(--amber)" stroke-width="12"
@@ -134,13 +216,13 @@
           <text x="55" y="60" text-anchor="middle" font-family="Playfair Display,serif" font-size="26" font-weight="900" fill="var(--amber)">45</text>
         </svg>
         <div style="text-align:center;">
-          <div style="font-size:13px;font-weight:600;color:var(--white);">TikTok</div>
-          <div style="font-size:10px;color:var(--text-dim);margin-bottom:9px;">@grilledsikh · 3,603 followers</div>
+          <div class="radial-name">TikTok</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-bottom:9px;">@grilledsikh · 3,603 followers</div>
           <div class="chip red">Dormant — 1 Month</div>
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div class="radial-wrap">
         <svg width="110" height="110" viewBox="0 0 110 110">
           <circle cx="55" cy="55" r="44" fill="none" stroke="var(--dark5)" stroke-width="12"/>
           <circle cx="55" cy="55" r="44" fill="none" stroke="var(--amber)" stroke-width="12"
@@ -148,13 +230,13 @@
           <text x="55" y="60" text-anchor="middle" font-family="Playfair Display,serif" font-size="26" font-weight="900" fill="var(--amber)">50</text>
         </svg>
         <div style="text-align:center;">
-          <div style="font-size:13px;font-weight:600;color:var(--white);">Google Business</div>
-          <div style="font-size:10px;color:var(--text-dim);margin-bottom:9px;">4.1★ · 1,560 reviews (2 locations)</div>
+          <div class="radial-name">Google Business</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-bottom:9px;">4.1★ · 1,560 reviews (2 locations)</div>
           <div class="chip amber">No Responses</div>
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div class="radial-wrap">
         <svg width="110" height="110" viewBox="0 0 110 110">
           <circle cx="55" cy="55" r="44" fill="none" stroke="var(--dark5)" stroke-width="12"/>
           <circle cx="55" cy="55" r="44" fill="none" stroke="var(--red)" stroke-width="12"
@@ -162,8 +244,8 @@
           <text x="55" y="60" text-anchor="middle" font-family="Playfair Display,serif" font-size="26" font-weight="900" fill="var(--red)">20</text>
         </svg>
         <div style="text-align:center;">
-          <div style="font-size:13px;font-weight:600;color:var(--white);">Ordering System</div>
-          <div style="font-size:10px;color:var(--text-dim);margin-bottom:9px;">order.grilledsikh.com</div>
+          <div class="radial-name">Ordering System</div>
+          <div style="font-size:12px;color:var(--text-dim);margin-bottom:9px;">order.grilledsikh.com</div>
           <div class="chip red">Links Broken</div>
         </div>
       </div>
@@ -209,7 +291,7 @@
                 <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--red);line-height:1;">3</div>
                 <div style="font-size:8px;color:var(--text-dim);letter-spacing:1px;">LIKES</div>
               </div>
-              <div style="flex:1;font-size:10px;color:var(--text-dim);padding:4px 8px;line-height:1.6;">Account completely abandoned. 9,715 followers receiving zero content. Algorithm has deprioritized the page — reactivation requires a structured comeback strategy.</div>
+              <div style="flex:1;font-size:12px;color:var(--text-dim);padding:4px 8px;line-height:1.6;">Account completely abandoned. 9,715 followers receiving zero content. Algorithm has deprioritized the page — reactivation requires a structured comeback strategy.</div>
             </div>
           </div>
 
@@ -260,19 +342,19 @@
         <div class="card" style="flex:1;">
           <div class="card-title">Critical Issues Identified</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(201,68,68,0.07);border-radius:2px;">
+            <div class="s-row" style="background:rgba(201,68,68,0.07);border-radius:2px;">
               <span style="font-size:12px;color:var(--white);">🔗 Ordering links broken</span>
               <div class="chip red">Revenue Loss</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(212,136,42,0.07);border-radius:2px;">
+            <div class="s-row" style="background:rgba(212,136,42,0.07);border-radius:2px;">
               <span style="font-size:12px;color:var(--white);">⭐ 1,560 reviews — responses lapsed</span>
               <div class="chip amber">Needs Revival</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(212,136,42,0.07);border-radius:2px;">
+            <div class="s-row" style="background:rgba(212,136,42,0.07);border-radius:2px;">
               <span style="font-size:12px;color:var(--white);">📸 Instagram — last post 37 weeks ago</span>
               <div class="chip amber">Dormant</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(212,136,42,0.07);border-radius:2px;">
+            <div class="s-row" style="background:rgba(212,136,42,0.07);border-radius:2px;">
               <span style="font-size:12px;color:var(--white);">🎵 TikTok — organic posting paused</span>
               <div class="chip amber">Needs Revival</div>
             </div>
@@ -347,7 +429,7 @@
             </div>
           </div>
 
-          <div style="background:rgba(76,175,125,0.06);border:1px solid rgba(76,175,125,0.18);border-left:3px solid var(--green);padding:14px 18px;border-radius:2px;">
+          <div class="callout green">
             <div style="font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;text-align:center;">Ads Are Working — Organic Must Match</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
               <span class="chip green" style="font-size:8px;">Paid Ads Proving Audience Pull ✓</span>
@@ -361,7 +443,7 @@
 
         <div style="background:rgba(212,136,42,0.05);border:1px solid rgba(212,136,42,0.2);border-radius:3px;padding:18px 20px;">
           <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);text-align:center;margin-bottom:12px;">The Opportunity</div>
-          <div style="font-size:12px;color:var(--text);text-align:center;line-height:1.7;">The ads are <strong style="color:var(--green);">clearly working</strong> — paid content on TikTok proves the brand has real audience pull. Organic posting just needs to match that same consistency and energy. The formula exists; it simply needs to run every week.</div>
+          <div style="font-size:13px;color:var(--text);text-align:center;line-height:1.7;">The ads are <strong style="color:var(--green);">clearly working</strong> — paid content on TikTok proves the brand has real audience pull. Organic posting just needs to match that same consistency and energy. The formula exists; it simply needs to run every week.</div>
         </div>
       </div>
 
@@ -397,34 +479,34 @@
               <text x="50" y="60" text-anchor="middle" font-size="8" fill="var(--text-dim)" font-family="Poppins,sans-serif">ENG. RATE</text>
             </svg>
             <div style="flex:1;">
-              <div style="font-size:11px;color:var(--text);line-height:1.7;">9,715 followers. Last post <strong style="color:var(--red);">37 weeks ago</strong> received only 3 likes. The account has algorithmically collapsed — Instagram stops distributing content from dormant accounts. The audience exists but the algorithm has deprioritized the page entirely.</div>
+              <div style="font-size:13px;color:var(--text);line-height:1.7;">9,715 followers. Last post <strong style="color:var(--red);">37 weeks ago</strong> received only 3 likes. The account has algorithmically collapsed — Instagram stops distributing content from dormant accounts. The audience exists but the algorithm has deprioritized the page entirely.</div>
             </div>
           </div>
 
           <!-- Content issues -->
           <div style="display:flex;flex-direction:column;gap:7px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(212,136,42,0.07);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">Content format</span>
+            <div class="s-row" style="background:rgba(212,136,42,0.07);border-radius:2px;">
+              <span class="s-label">Content format</span>
               <div class="chip amber">Static images only</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(212,136,42,0.07);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">Last post published</span>
+            <div class="s-row" style="background:rgba(212,136,42,0.07);border-radius:2px;">
+              <span class="s-label">Last post published</span>
               <div class="chip amber">37 Weeks Ago</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(212,136,42,0.07);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">Reels published</span>
+            <div class="s-row" style="background:rgba(212,136,42,0.07);border-radius:2px;">
+              <span class="s-label">Reels published</span>
               <div class="chip amber">None found</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(212,136,42,0.07);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">TikTok content reposted to IG</span>
+            <div class="s-row" style="background:rgba(212,136,42,0.07);border-radius:2px;">
+              <span class="s-label">TikTok content reposted to IG</span>
               <div class="chip amber">Not happening</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(76,175,125,0.07);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">Story Highlights</span>
+            <div class="s-row" style="background:rgba(76,175,125,0.07);border-radius:2px;">
+              <span class="s-label">Story Highlights</span>
               <div class="chip green">Active ✓</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(76,175,125,0.07);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">Location links in bio</span>
+            <div class="s-row" style="background:rgba(76,175,125,0.07);border-radius:2px;">
+              <span class="s-label">Location links in bio</span>
               <div class="chip green">Present ✓</div>
             </div>
           </div>
@@ -432,7 +514,7 @@
 
         <div style="background:rgba(212,136,42,0.05);border:1px solid rgba(212,136,42,0.2);border-radius:3px;padding:18px 20px;">
           <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);text-align:center;margin-bottom:12px;">The Gap</div>
-          <div style="font-size:12px;color:var(--text);text-align:center;line-height:1.7;">The last Instagram post was <strong style="color:var(--amber);">37 weeks ago</strong>. The ad strategy shows the brand knows how to reach an audience — that same energy needs to carry over into <strong style="color:var(--white);">consistent organic posting</strong> on Instagram and TikTok.</div>
+          <div style="font-size:13px;color:var(--text);text-align:center;line-height:1.7;">The last Instagram post was <strong style="color:var(--amber);">37 weeks ago</strong>. The ad strategy shows the brand knows how to reach an audience — that same energy needs to carry over into <strong style="color:var(--white);">consistent organic posting</strong> on Instagram and TikTok.</div>
         </div>
 
       </div>
@@ -470,25 +552,25 @@
               <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;text-align:center;">Ar Rayyan Branch</div>
               <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--gold);text-align:center;line-height:1;">4.1</div>
               <div style="font-size:16px;color:#f4b942;text-align:center;letter-spacing:2px;margin-bottom:4px;">★★★★☆</div>
-              <div style="font-size:10px;color:var(--text-dim);text-align:center;">799 Reviews</div>
+              <div style="font-size:12px;color:var(--text-dim);text-align:center;">799 Reviews</div>
             </div>
 
             <div style="background:var(--dark4);border:1px solid rgba(201,169,97,0.12);border-radius:3px;padding:14px;">
               <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;text-align:center;">An Narjis Branch</div>
               <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:900;color:var(--gold);text-align:center;line-height:1;">4.1</div>
               <div style="font-size:16px;color:#f4b942;text-align:center;letter-spacing:2px;margin-bottom:4px;">★★★★☆</div>
-              <div style="font-size:10px;color:var(--text-dim);text-align:center;">761 Reviews</div>
+              <div style="font-size:12px;color:var(--text-dim);text-align:center;">761 Reviews</div>
             </div>
 
           </div>
 
           <!-- Combined review bars -->
           <div style="margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="font-size:10px;color:var(--text-dim);width:20px;">5★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:50%;height:100%;background:#f4b942;border-radius:4px;"></div></div><span style="font-size:10px;color:var(--text-dim);width:40px;text-align:right;">~780</span></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="font-size:10px;color:var(--text-dim);width:20px;">4★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:22%;height:100%;background:#f4b942;border-radius:4px;"></div></div><span style="font-size:10px;color:var(--text-dim);width:40px;text-align:right;">~343</span></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="font-size:10px;color:var(--text-dim);width:20px;">3★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:10%;height:100%;background:var(--amber);border-radius:4px;"></div></div><span style="font-size:10px;color:var(--text-dim);width:40px;text-align:right;">~156</span></div>
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="font-size:10px;color:var(--text-dim);width:20px;">2★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:7%;height:100%;background:var(--amber);border-radius:4px;"></div></div><span style="font-size:10px;color:var(--text-dim);width:40px;text-align:right;">~109</span></div>
-            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:10px;color:var(--text-dim);width:20px;">1★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:11%;height:100%;background:var(--red);border-radius:4px;"></div></div><span style="font-size:10px;color:var(--text-dim);width:40px;text-align:right;">~172</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="font-size:12px;color:var(--text-dim);width:20px;">5★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:50%;height:100%;background:#f4b942;border-radius:4px;"></div></div><span style="font-size:12px;color:var(--text-dim);width:40px;text-align:right;">~780</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="font-size:12px;color:var(--text-dim);width:20px;">4★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:22%;height:100%;background:#f4b942;border-radius:4px;"></div></div><span style="font-size:12px;color:var(--text-dim);width:40px;text-align:right;">~343</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="font-size:12px;color:var(--text-dim);width:20px;">3★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:10%;height:100%;background:var(--amber);border-radius:4px;"></div></div><span style="font-size:12px;color:var(--text-dim);width:40px;text-align:right;">~156</span></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:9px;"><span style="font-size:12px;color:var(--text-dim);width:20px;">2★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:7%;height:100%;background:var(--amber);border-radius:4px;"></div></div><span style="font-size:12px;color:var(--text-dim);width:40px;text-align:right;">~109</span></div>
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text-dim);width:20px;">1★</span><div style="flex:1;height:8px;background:var(--dark5);border-radius:4px;overflow:hidden;"><div style="width:11%;height:100%;background:var(--red);border-radius:4px;"></div></div><span style="font-size:12px;color:var(--text-dim);width:40px;text-align:right;">~172</span></div>
           </div>
 
           <!-- Response rate -->
@@ -515,15 +597,15 @@
           <div style="display:flex;flex-direction:column;gap:8px;">
             <div style="background:rgba(76,175,125,0.06);border:1px solid rgba(76,175,125,0.15);border-radius:2px;padding:14px 16px;">
               <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:10px;color:var(--green);">★★★★★ — 4 days ago</span><div class="chip amber" style="font-size:8px;">Response Lapsed</div></div>
-              <div style="font-size:10px;color:var(--text);line-height:1.6;">Positive review praising the chicken kebab, freshness, cleanliness, and Shawarma quality.</div>
+              <div style="font-size:13px;color:var(--text);line-height:1.6;">Positive review praising the chicken kebab, freshness, cleanliness, and Shawarma quality.</div>
             </div>
             <div style="background:rgba(212,136,42,0.06);border:1px solid rgba(212,136,42,0.15);border-radius:2px;padding:14px 16px;">
               <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:10px;color:var(--amber);">★★☆☆☆ — 6 days ago</span><div class="chip amber" style="font-size:8px;">Needs Response</div></div>
-              <div style="font-size:10px;color:var(--text);line-height:1.6;">Negative review citing slow service and quality inconsistency over multiple visits — publicly unaddressed.</div>
+              <div style="font-size:13px;color:var(--text);line-height:1.6;">Negative review citing slow service and quality inconsistency over multiple visits — publicly unaddressed.</div>
             </div>
             <div style="background:rgba(76,175,125,0.06);border:1px solid rgba(76,175,125,0.15);border-radius:2px;padding:14px 16px;">
               <div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:10px;color:var(--green);">★★★★★ — 1 week ago</span><div class="chip amber" style="font-size:8px;">Response Lapsed</div></div>
-              <div style="font-size:10px;color:var(--text);line-height:1.6;">5-star review praising the experience, hospitality, and food quality. Never acknowledged by the brand.</div>
+              <div style="font-size:13px;color:var(--text);line-height:1.6;">5-star review praising the experience, hospitality, and food quality. Never acknowledged by the brand.</div>
             </div>
           </div>
         </div>
@@ -542,27 +624,27 @@
           </div>
 
           <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(201,68,68,0.08);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">Instagram bio order link</span>
+            <div class="s-row" style="background:rgba(201,68,68,0.08);border-radius:2px;">
+              <span class="s-label">Instagram bio order link</span>
               <div class="chip red">Broken</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(201,68,68,0.08);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">TikTok bio order link</span>
+            <div class="s-row" style="background:rgba(201,68,68,0.08);border-radius:2px;">
+              <span class="s-label">TikTok bio order link</span>
               <div class="chip red">Broken</div>
             </div>
             <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(201,69,69,0.08);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">Linktree fast links page</span>
+              <span class="s-label">Linktree fast links page</span>
               <div class="chip amber">Present — Unverified</div>
             </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(76,175,125,0.06);border-radius:2px;">
-              <span style="font-size:11px;color:var(--text);">Google "Order online" button</span>
+            <div class="s-row" style="background:rgba(76,175,125,0.06);border-radius:2px;">
+              <span class="s-label">Google "Order online" button</span>
               <div class="chip green">Working ✓</div>
             </div>
           </div>
 
           <div style="background:rgba(201,68,68,0.06);border:1px solid rgba(201,68,68,0.18);border-left:3px solid var(--red);padding:16px 18px;border-radius:2px;">
             <div style="font-size:10px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;text-align:center;">Business Impact</div>
-            <div style="font-size:11px;color:var(--text);line-height:1.7;text-align:center;">Every user who taps the order link from Instagram or TikTok — platforms that drive millions of impressions — hits a dead end. Viral reach is generating awareness that cannot convert to orders.</div>
+            <div style="font-size:13px;color:var(--text);line-height:1.7;text-align:center;">Every user who taps the order link from Instagram or TikTok — platforms that drive millions of impressions — hits a dead end. Viral reach is generating awareness that cannot convert to orders.</div>
           </div>
         </div>
 
@@ -570,7 +652,7 @@
           <div class="card-title">Locations in Bio</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <div style="background:rgba(76,175,125,0.06);border:1px solid rgba(76,175,125,0.15);border-radius:2px;padding:11px 14px;">
-              <div style="font-size:10px;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;">Ar Rayyan Branch</div>
+              <div style="font-size:12px;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;">Ar Rayyan Branch</div>
               <div style="font-size:12px;color:var(--white);">8370 Al Imam Al Shafei, Ar Rayyan, Riyadh</div>
               <div style="display:flex;gap:6px;margin-top:6px;">
                 <span class="chip green" style="font-size:8px;">Map Link in Bio ✓</span>
@@ -578,7 +660,7 @@
               </div>
             </div>
             <div style="background:rgba(76,175,125,0.06);border:1px solid rgba(76,175,125,0.15);border-radius:2px;padding:11px 14px;">
-              <div style="font-size:10px;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;">An Narjis Branch</div>
+              <div style="font-size:12px;color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;letter-spacing:1px;">An Narjis Branch</div>
               <div style="font-size:12px;color:var(--white);">An Narjis, Riyadh 13333</div>
               <div style="display:flex;gap:6px;margin-top:6px;">
                 <span class="chip green" style="font-size:8px;">Map Link in Bio ✓</span>
@@ -610,18 +692,18 @@
   <div class="page-body">
 
     <!-- 4 service pillars -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;">
+    <div class="grid-4">
 
       <div style="background:var(--dark3);border:1px solid rgba(201,169,97,0.15);border-top:4px solid var(--gold);border-radius:3px;padding:22px 18px;display:flex;flex-direction:column;gap:9px;">
         <div style="font-size:28px;text-align:center;">🌐</div>
         <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--white);text-align:center;line-height:1.2;">Website &<br>Order Fix</div>
         <div style="height:1px;background:rgba(201,169,97,0.12);"></div>
         <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Fix all broken order links</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Test & verify all bio links</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Ordering funnel optimization</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Landing page for ad traffic</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> SEO — Riyadh search terms</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Fix all broken order links</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Test & verify all bio links</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Ordering funnel optimization</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Landing page for ad traffic</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> SEO — Riyadh search terms</div>
         </div>
       </div>
 
@@ -630,11 +712,11 @@
         <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--white);text-align:center;line-height:1.2;">Social Media<br>Management</div>
         <div style="height:1px;background:rgba(201,169,97,0.12);"></div>
         <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> IG · TikTok · Snap · FB</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Cross-post TikTok to Reels</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Community management</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Hashtag strategy (KSA)</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Monthly reports</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> IG · TikTok · Snap · FB</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Cross-post TikTok to Reels</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Community management</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Hashtag strategy (KSA)</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Monthly reports</div>
         </div>
       </div>
 
@@ -643,11 +725,11 @@
         <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--white);text-align:center;line-height:1.2;">Consistent<br>Content</div>
         <div style="height:1px;background:rgba(201,169,97,0.12);"></div>
         <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Kitchen & food POV videos</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Behind-the-scenes content</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Seasonal campaign planning</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Bilingual Arabic copywriting</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Monthly content calendar</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Kitchen & food POV videos</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Behind-the-scenes content</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Seasonal campaign planning</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Bilingual Arabic copywriting</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Monthly content calendar</div>
         </div>
       </div>
 
@@ -656,11 +738,11 @@
         <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--white);text-align:center;line-height:1.2;">Google<br>Optimization</div>
         <div style="height:1px;background:rgba(201,169,97,0.12);"></div>
         <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Review response system (×2)</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Google Posts — weekly</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Review generation campaigns</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Photo library uploads</div>
-          <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text);"><span style="color:var(--green);">✓</span> Both locations managed</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Review response system (×2)</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Google Posts — weekly</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Review generation campaigns</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Photo library uploads</div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);"><span style="color:var(--green);">✓</span> Both locations managed</div>
         </div>
       </div>
 
@@ -745,7 +827,7 @@
       </div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
         <div style="background:var(--gold);color:var(--dark);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px 26px;border-radius:2px;white-space:nowrap;">Next Step: Strategy Session</div>
-        <div style="font-size:11px;color:var(--text-dim);text-align:right;">eliteconsultantco.com<br><span style="font-size:9px;">Confidential · No financial guarantees implied</span></div>
+        <div style="font-size:12px;color:var(--text-dim);text-align:right;">eliteconsultantco.com<br><span style="font-size:9px;">Confidential · No financial guarantees implied</span></div>
       </div>
     </div>
 
